@@ -1,87 +1,56 @@
 function ProductCard({ product }) {
-  const stars = "★".repeat(product.rating);
-  const emptyStars = "☆".repeat(5 - product.rating);
-
   return (
     <article className="product-card">
-
-      <div className="product-image">
-
-        <span className="discount">
-          {product.discount}
-        </span>
-
+      <div className="product-image-wrapper">
         <img
           src={product.image}
           alt={product.name}
-          loading="lazy"
-          onError={(event) => {
-            event.currentTarget.src =
-              "https://placehold.co/800x700/f3f4f6/111827?text=Product+Image";
-          }}
+          className="product-image"
         />
-
       </div>
 
       <div className="product-content">
-
-        <small className="category-name">
+        <span className="product-category">
           {product.category}
-        </small>
+        </span>
 
-        <div className="rating">
-
-          <span>
-            {stars}
-            {emptyStars}
-          </span>
-
-          <small>
-            {product.reviews.toLocaleString()} reviews
-          </small>
-
-        </div>
-
-        <h3>
+        <h3 className="product-title">
           {product.name}
         </h3>
 
-        <p>
+        <div className="product-rating">
+          <span className="stars">
+            ★★★★★
+          </span>
+
+          <span className="rating-number">
+            {product.rating}
+          </span>
+
+          <span className="reviews">
+            ({product.reviews.toLocaleString()} reviews)
+          </span>
+        </div>
+
+        <p className="product-description">
           {product.description}
         </p>
 
-        <div className="price-row">
-
-          <div>
-
-            <strong>
-              {product.price}
-            </strong>
-
-            <del>
-              {product.oldPrice}
-            </del>
-
+        <div className="product-bottom">
+          <div className="product-price">
+            {product.price}
           </div>
 
+          <a
+            href={product.amazonUrl}
+            className="amazon-button"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Check Price
+          </a>
         </div>
-
-        <a
-          href={product.affiliateUrl || "#"}
-          target="_blank"
-          rel="nofollow sponsored noopener noreferrer"
-          className="amazon-button"
-        >
-          View Product
-
-          <span>
-            ↗
-          </span>
-
-        </a>
-
       </div>
-
     </article>
   );
 }
